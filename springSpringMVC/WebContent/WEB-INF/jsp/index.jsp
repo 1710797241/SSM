@@ -9,18 +9,19 @@
 			*{
 				padding: 0px;
 				margin: 0px;
-				color: white;
 			}
 			a{
 				text-decoration:none;
+				color: #999;
 			}
 			a:hover{
-				color: #c60;
+				color: #999;
 			}
 			.nav{
 				width:100%
 				height:40px;
-				background-color:#550283;
+				background: #f2f2f2;
+				font-size:12px;
 			}
 			.nav-context{
 			   width: 1230px;
@@ -42,29 +43,36 @@
 				position: absolute;
 				right: 200px;
 			}
-		    .imgBg{
-		    	width: 100%;
-		    	height:690px;
-		    	background: url(img/02.JPG) no-repeat 0 0;
-		    	position: absolute;
-		    	bottom:0px;
-		    	
-		    }
+			#main{
+				position:relative;
+				left:0
+				top:0
+			}
 		</style>
+		<script type="text/javascript">
+			window.onload=function(){
+				var sw = screen.availWidth-17;
+				var sh = screen.availHeight;
+				document.getElementById("main").style.width=sw+"px";
+				document.getElementById("main").style.height=sh+"px";
+			}
+		</script>
 	</head>
 	<body>
 		<div class="nav">
 			<div class="nav-context">
 					<ul class="left">
-						<li>喵，欢迎来天猫</li>
+						<li style="color: #999;">喵，欢迎来天猫</li>
 						<li><a href="${pageContext.request.contextPath}/toLogin.action">请登录</a></li>
-						<li><a href="${pageContext.request.contextPath}/toRegister.action">免费注册</a></li>
+						<li><a href="${pageContext.request.contextPath}/toRegister.action">免费注册</a></li>
 					</ul>
 			       <ul class="right">
-						<li><a href="${pageContext.request.contextPath}/goods/showGoods.action">商品详情</a></li>
+						<li><a href="${pageContext.request.contextPath}/goods/showGoods.action">我的淘宝</a></li>
 					</ul>
 			</div>
 		</div>
-		<img src="${pageContext.request.contextPath}/resources/img/02.JPG" width="1520px"/>
+		<div id="main">
+			<img alt="" src="${pageContext.request.contextPath}/resources/img/index.png">
+		</div>
 	</body>
 </html>
