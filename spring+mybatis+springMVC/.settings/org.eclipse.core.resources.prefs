@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/jsp/index.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/login.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/modifyPass.jsp=ISO-8859-1
+encoding//WebContent/WEB-INF/jsp/modifyPerson.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/personalInfo.jsp=UTF-8
+encoding//src/log4j.properties=UTF-8
