@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ <mapper namespace="models.dao.StuXmlDao">
+ 	<select id="selectAll" resultType="models.domain.Student">
+ 	select s_id sId,s_name sName,class_id classId from student
+ 	</select>
+ 	<insert id="insertStu" parameterType="models.domain.Student">
+ 	insert into student(s_name,class_id)values(#{sName},#{classId})
+ 	</insert>
+ 	<update id="updateStu" parameterType="models.domain.Student">
+ 	update student set s_name = #{sName} where s_id = #{sId}
+ 	</update>
+ 	<delete id="deleteStu" parameterType="java.lang.Integer">
+ 	delete  from student where s_id=#{id}
+ 	</delete>
+ </mapper>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="models.dao.StudentMapper" >
+ 	<select id="selectAll" resultType="vo.StudentVo" parameterType="models.dto.StudentDto">
+ 		select 
+ 		s_id sId,
+ 		s_name sName,
+ 		s.class_id cId,
+ 		c.c_name cName,
+ 		t.t_id tId,
+ 		t.t_name tName
+ 		
+ 		from student s
+ 		inner join 
+ 		class c
+ 		on s.class_id = c.c_id
+ 		inner join 
+ 		teacher t
+ 		on c.teacher_id = t.t_id
+ 		<if test="classId!=null ">
+ 		and s.class_id = #{classId}
+ 		</if>
+ 		<if test="sName!=null ">
+ 		and s.s_name like "%"#{sName}"%"
+ 		</if>
+ 	</select>
+ 	<insert id="insertMany" parameterType="models.dto.StudentDto" >
+ 		insert into student
+ 		(s_id,s_name,class_id)
+ 		values
+ 		<foreach collection="studentList" item="item" separator=",">
+ 			(null,#{item.sName},#{item.classId})
+ 		</foreach>
+ 		
+ 	</insert>
+ 	<update id="updateMany" parameterType="models.dto.StudentDto">
+ 		update student
+ 		
+ 		<trim prefix="set " suffixOverrides=",">
+ 			<trim prefix="s_name = case" suffix="end,">
+ 				<foreach collection="studentList" item="item">
+ 					when s_id =#{item.sId} then #{item.sName}
+ 				</foreach>
+ 			</trim> 
+ 			<trim prefix="class_id = case" suffix="end,">
+ 				<foreach collection="studentList" item="item">
+ 					when s_id =#{item.sId} then #{item.classId}
+ 				</foreach>
+ 			</trim> 
+ 		</trim>
+ 		<where>
+ 			<foreach collection="studentList" item="item" separator="or">
+ 				 s_id =#{item.sId}
+ 				</foreach>
+ 		</where>
+ 		
+ 	</update>
+ 	<delete id="deleteMany" parameterType="java.util.List">
+ 		delete from student 
+ 		<where>
+	 		<foreach collection="list" item="item" separator="or">
+	 			s_id = #{item}
+	 		</foreach>
+ 		</where>
+ 		
+ 		
+ 	</delete>
+ 	
+ 	
+ 		<select id="selectAllByClassId" resultType="models.domain.Student" >
+ 		select 
+ 		s_id sId,
+ 		s_name sName,
+ 		s.class_id classId
+ 		
+ 		from student s
+ 		WHERE s.class_id = #{cId}
+ 		
+ 	</select>
+</mapper>

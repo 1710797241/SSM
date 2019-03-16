@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "http://mybatis.org/dtd/mybatis-3-mapper.dtd" "mybatis-3-mapper.dtd">
+<mapper namespace="models.dao.ClassMapper">
+	<resultMap type="models.domain.Class" id="class_stu">
+		<id column="c_id" property="cId"/>
+		<result column="c_name" property="cName"/>
+		<result column="teacher_id" property="teacherId"/>
+		<collection property="studentList" 
+			ofType="models.domain.Student"
+			select="models.dao.StudentMapper.selectAllByClassId" column="c_id">
+					</collection>
+		
+	</resultMap>
+	
+	<select id="selectByClassId" parameterType="java.lang.Integer" resultMap="class_stu">
+		select 
+			c_id,c_name,teacher_id
+			from class
+			where c_id = #{c_id}
+	</select>
+	
+	<select id="selectByClaId" parameterType="java.lang.Integer" resultType="vo.StudentVo">
+		select
+		s_id sId,
+ 		s_name sName,
+ 		s.class_id cId,
+ 		c.c_name cName,
+ 		t.t_id tId,
+ 		t.t_name tName
+ 		from student s
+ 		inner join 
+ 		class c
+ 		on s.class_id = c.c_id
+ 		inner join 
+ 		teacher t
+ 		on c.teacher_id = t.t_id
+ 		and s.class_id in
+		(select 
+			c_id
+			from class
+			where c_id = #{c_id})
+	</select>
+	
+</mapper>
