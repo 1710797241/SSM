@@ -68,6 +68,7 @@
 					</ul>
 			       <ul class="right">
 						<li><a href="${pageContext.request.contextPath}/goods/showGoods.action">我的淘宝</a></li>
+						<li><a href="${pageContext.request.contextPath}/logout.action">退出</a></li>
 					</ul>
 			</div>
 		</div>

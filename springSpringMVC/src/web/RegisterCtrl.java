@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,14 +24,15 @@ public class RegisterCtrl {
 	}
 	@RequestMapping(value="/register.action",method=RequestMethod.POST)
 	public String register(HttpServletRequest req, User user,MultipartFile file) {
-		String originalFilename = file.getOriginalFilename();
-		String path = "C:\\Users\\17107\\Pictures\\upload";
 		try {
-			file.transferTo(new File(path, originalFilename));
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		String originalFilename = file.getOriginalFilename();
+		String extName = originalFilename.substring(originalFilename.indexOf("."));
+		String newFileName = UUID.randomUUID().toString().replaceAll("-", "").concat(extName);
+		String path = req.getServletContext().getRealPath("/resources/upload");
+		
+			file.transferTo(new File(path, newFileName));
+		} catch (Exception e) {
+			return "redirect:/toRegister.action";
 		}
 		return "redirect:/toLogin.action";
 	}

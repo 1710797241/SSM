@@ -11,7 +11,7 @@ public class GoodsCtrl {
 	@RequestMapping("/showGoods.action")
 	public ModelAndView showGoods() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("goods/myMall");
+		mv.setViewName("goods/myTaoBao");
 	
 		return mv;
 	}
