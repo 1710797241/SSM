@@ -11,7 +11,6 @@ import dao.UserDao;
 import domain.User;
 import util.JdbcUtil;
 
-@Service
 public class UserDaoImpl implements UserDao {
 
 	

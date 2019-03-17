@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
-import dao.impl.UserDaoImpl;
 import domain.User;
+import service.UserService;
 
 @Controller
 public class RegisterCtrl {
 	
 	@Autowired
-	private UserDaoImpl userDaoImpl;
+	private UserService userService;
 	
 	@RequestMapping("/toRegister.action")
 	public String toRegister() {
@@ -40,8 +41,8 @@ public class RegisterCtrl {
 		} catch (Exception e) {
 			return "redirect:/toRegister.action";
 		}
-		Integer count = userDaoImpl.insertForRegister(user);
-		if(count==null) {
+		Map<String, Object> map = userService.insertForRegister(user);
+		if(map.get("count")==null) {
 			return "redirect:/toRegister.action";
 		}
 		

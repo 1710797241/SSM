@@ -1,6 +1,8 @@
 package web;
 
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import dao.impl.UserDaoImpl;
 import domain.User;
+import service.UserService;
 
 @Controller
 public class LoginCtrl {
 	
 	@Autowired
-	private UserDaoImpl userDaoImpl;
+	private UserService userService;
 	@RequestMapping(value="/toLogin.action")
 	public ModelAndView toLogin() {
 		ModelAndView mv = new ModelAndView();
@@ -28,8 +30,8 @@ public class LoginCtrl {
 		ModelAndView mv = new ModelAndView();
 		Integer count = (Integer) session.getAttribute("count");
 		
-		String username = userDaoImpl.selectForLogin(user);
-		if(username==null) {
+		Map<String, Object> map = userService.selectForLogin(user);
+		if(map.get("username")==null) {
 			
 			if(count==null) {
 				session.setAttribute("count", 1);
@@ -50,7 +52,7 @@ public class LoginCtrl {
 			
 		}
 		
-		session.setAttribute("username", username);
+		session.setAttribute("username", map.get("username"));
 		mv.setViewName("redirect:/index.action");
 		return mv;
 	}
