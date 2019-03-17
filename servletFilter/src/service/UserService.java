@@ -23,4 +23,16 @@ public class UserService {
 		
 		
 	}
+	public Map<String,Object> insertForRegister(User user){
+		Map<String,Object> map = new HashMap<String,Object>();
+		Integer count = userDao.insertForRegister(user);
+		
+		
+		map.put("total", count);
+		
+		
+		return map;
+		
+		
+	}
 }

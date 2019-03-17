@@ -26,17 +26,18 @@ public class LoginServlet extends HttpServlet {
 			user.setPassword(password);
 			Map<String, Object> map = userService.selectForLogin(user);
 			Integer count = (Integer) request.getServletContext().getAttribute("count");
+			System.out.println(count);
 			if(map.get("username")==null) {
 				if(count==null) {
 					request.getServletContext().setAttribute("count", 1);
 				}else {
-					request.getServletContext().setAttribute("count", count+1);
+					request.getServletContext().setAttribute("count", ++count);
 					if(count==3) {
 						response.sendRedirect(request.getContextPath()+"/jsp/register.jsp");
+						return;
 					}
 				}
-				
-				response.sendRedirect(request.getContextPath()+"/jsp/login.jsp");
+				request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
 			}else {
 				request.getSession().setAttribute("username", map.get("username"));
 				response.sendRedirect(request.getContextPath()+"/jsp/index.jsp");

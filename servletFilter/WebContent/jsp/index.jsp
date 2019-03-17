@@ -67,7 +67,8 @@
 						<li><a href="${pageContext.request.contextPath}/jsp/register.jsp">免费注册</a></li>
 					</ul>
 			       <ul class="right">
-						<li><a href="${pageContext.request.contextPath}/jsp/goods/myMall.jsp">我的淘宝</a></li>
+						<li><a href="${pageContext.request.contextPath}/jsp/goods/myTaoBao.jsp">我的淘宝</a></li>
+						<li><a href="${pageContext.request.contextPath}/logout">退出</a></li>
 					</ul>
 			</div>
 		</div>

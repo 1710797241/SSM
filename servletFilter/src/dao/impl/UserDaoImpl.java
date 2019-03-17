@@ -19,11 +19,12 @@ public class UserDaoImpl implements UserDao {
 		String username = null;
 		try {
 			connection.setAutoCommit(false);
-			String sql = "select * from user where name=? and psw=?";
+			String sql = "select * from user where username=? and password=?";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, user.getUsername());
 			ps.setString(2, user.getPassword());
 			ResultSet rs = ps.executeQuery();
+			connection.commit();
 			while(rs.next()) {
 				username = rs.getString(1);
 			}
@@ -32,6 +33,29 @@ public class UserDaoImpl implements UserDao {
 			e.printStackTrace();
 		}
 		return username;
+	}
+	
+	@Override
+	public Integer insertForRegister(User user) {
+		Connection connection = JdbcUtil.getConnection();
+		String username = null;
+		Integer count = null;
+		try {
+			connection.setAutoCommit(false);
+			String sql = "insert into user (username,password,name,email,phone)values(?,?,?,?,?)";
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setString(1, user.getUsername());
+			ps.setString(2, user.getPassword());
+			ps.setString(3, user.getName());
+			ps.setString(4, user.getEmail());
+			ps.setString(5, user.getPhone());
+			 count = ps.executeUpdate();
+			 connection.commit();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
 	}
 
 }
