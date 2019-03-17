@@ -5,11 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Service;
 
 import dao.UserDao;
 import domain.User;
 import util.JdbcUtil;
 
+@Service
 public class UserDaoImpl implements UserDao {
 
 	

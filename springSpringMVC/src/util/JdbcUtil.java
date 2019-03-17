@@ -18,7 +18,6 @@ public class JdbcUtil {
 		try {
 			if(conn == null) {
 				Class.forName(driverClassName);
-				System.out.println("加载成功");
 				conn = DriverManager.getConnection(url, username, password);
 			}
 			

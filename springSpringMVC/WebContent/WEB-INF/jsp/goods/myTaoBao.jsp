@@ -7,6 +7,6 @@
 		<title></title>
 	</head>
 	<body>
-		商品信息页
+		我的淘宝
 	</body>
 </html>
