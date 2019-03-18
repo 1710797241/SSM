@@ -3,6 +3,9 @@ package web;
 
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +31,9 @@ public class LoginCtrl {
 	@RequestMapping(value="/login.action",method=RequestMethod.POST)
 	public ModelAndView toLogin(User user,HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		Integer count = (Integer) session.getAttribute("count");
 		
+		Integer count = (Integer) session.getAttribute("count");
+		System.out.println(session+"  session +login");
 		Map<String, Object> map = userService.selectForLogin(user);
 		if(map.get("username")==null) {
 			
