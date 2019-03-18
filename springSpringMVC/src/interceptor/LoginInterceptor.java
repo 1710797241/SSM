@@ -28,8 +28,6 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object e) throws Exception {
 		// TODO Auto-generated method stub
 		HttpSession session = req.getSession();
-		System.out.println(session+"  session +inter");
-		System.out.println(session.getAttribute("username"));
 		if(session.getAttribute("username")==null) {
 			resp.sendRedirect(req.getContextPath()+"/toLogin.action");
 		}else {

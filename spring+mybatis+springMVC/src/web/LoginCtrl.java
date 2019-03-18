@@ -3,9 +3,6 @@ package web;
 
 import java.util.Map;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +33,8 @@ public class LoginCtrl {
 			
 			if(count==null) {
 				session.setAttribute("count", 1);
-				mv.setViewName("redirect:/toLogin.action");
+				
+				mv.setViewName("forward:/toLogin.action");
 				return mv;
 			}else {
 				session.setAttribute("count", ++count);
@@ -55,7 +53,7 @@ public class LoginCtrl {
 		}
 		
 		session.setAttribute("username", map.get("username"));
-		mv.setViewName("redirect:/index.action");
+		mv.setViewName("forward:/index.action");
 		return mv;
 	}
 }

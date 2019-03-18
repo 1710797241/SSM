@@ -1,8 +1,5 @@
 package service;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +8,6 @@ import org.springframework.stereotype.Service;
 import dao.UserDao;
 import dao.impl.UserDaoImpl;
 import domain.User;
-import util.JdbcUtil;
 
 @Service
 public class UserService {
