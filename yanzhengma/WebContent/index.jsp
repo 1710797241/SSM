@@ -14,7 +14,7 @@ $(function(){
 			        type:"GET",
 			        url:"${pageContext.request.contextPath}/yan",
 			        success:function(data){
-				$("#yanImg").attr("src","${pageContext.request.contextPath}/yan")
+				$("#yanImg").attr("src","${pageContext.request.contextPath}/yan?ran="+Math.random())
 			        },
 			        error:function(jqXHR){
 			           aler("发生错误："+ jqXHR.status);

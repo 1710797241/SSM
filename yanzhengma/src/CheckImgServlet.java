@@ -5,17 +5,11 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageOutputStream;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,8 +27,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/yan")
 public class CheckImgServlet extends HttpServlet {
 
-	// 集合中保存所有成语
-	private List<String> words = new ArrayList<String>();
 
 	@Override
 	public void init() throws ServletException {
@@ -71,7 +63,7 @@ public class CheckImgServlet extends HttpServlet {
 		graphics2d.setFont(new Font("宋体", Font.BOLD, 18));
 
 		Random random = new Random();
-		int yanLen = 5;
+		int yanLen = 4;
 		// 定义x坐标
 		int x = 10;
 		
@@ -96,7 +88,7 @@ public class CheckImgServlet extends HttpServlet {
 
 		// 将验证码内容保存session
 		request.getSession().setAttribute("checkcode_session", sb);
-
+		System.out.println(request.getSession().getAttribute("checkcode_session"));
 		// 步骤五 绘制干扰线
 		graphics.setColor(getRandColor(160, 200));
 		int x1;
@@ -118,7 +110,7 @@ public class CheckImgServlet extends HttpServlet {
 		//将图片写到response.getOutputStream()中
 		String path=getServletContext().getRealPath("/yan");
 		System.out.println(path);
-		File file = new File(path+"\\"+"yanzhengma.jpg");
+		File file = new File(path+File.separator+"yanzhengma.jpg");
 		System.out.println("文件存在"+file.exists());
 		if(!file.exists()) {
 			boolean isCreate = file.createNewFile();

@@ -9,4 +9,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>GetCheck</display-name>
+    <servlet-name>GetCheck</servlet-name>
+    <servlet-class>GetCheck</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetCheck</servlet-name>
+    <url-pattern>/getCheck</url-pattern>
+  </servlet-mapping>
 </web-app>
